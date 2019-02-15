@@ -1,5 +1,6 @@
 using System;
 using System.Reflection.Emit;
+using System.Runtime.CompilerServices;
 
 namespace Benchmark
 {
@@ -9,13 +10,13 @@ namespace Benchmark
         {
             if (typeof(T) == typeof(float))
             {
-                var floatValue = Converter<T, float>.ConverterMethod(value);
+                var floatValue = Converter<T, float>.Convert(value);
                 return ignore.IgnoreValue(floatValue);
             }
 
             if (typeof(T) == typeof(double))
             {
-                var doubleValue = Converter<T, double>.ConverterMethod(value);
+                var doubleValue = Converter<T, double>.Convert(value);
                 return ignore.IgnoreValue(doubleValue);
             }
 
@@ -56,11 +57,17 @@ namespace Benchmark
             where TIn : struct
             where TOut : struct
         {
-            public static Func<TIn, TOut> ConverterMethod { get; }
+            private static readonly Func<TIn, TOut> ConverterMethod;
 
             static Converter()
             {
                 ConverterMethod = EmitConverter();
+            }
+
+            [MethodImpl(MethodImplOptions.AggressiveInlining)]
+            public static TOut Convert(TIn value)
+            {
+                return ConverterMethod(value);
             }
 
             private static Func<TIn, TOut> EmitConverter()

@@ -5,7 +5,7 @@ namespace Benchmark
 {
     public class Runner
     {
-        const int ElementAmount = 10000;
+        const int ElementAmount = 10000000;
 
         private readonly double[] _doubleCollection;
         private readonly float[] _floatCollection;

@@ -7,6 +7,9 @@ namespace Benchmark
         static void Main(string[] args)
         {
             BenchmarkRunner.Run<Runner>();
+            // var runner = new Runner();
+            // runner.Generic();
+            // runner.Native();
         }
     }
 }

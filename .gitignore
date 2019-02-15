@@ -293,3 +293,4 @@ BuildAutomation/
 
 # DI configs
 /Sources/Qoniac.Ovalis.DataImport/**/*.config
+/Benchmark/BenchmarkDotNet.Artifacts/**/*.*
